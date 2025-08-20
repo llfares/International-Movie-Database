@@ -1,0 +1,47 @@
+{{!-- Creating Releases table --}}
+<table id="releases-table">
+{{!-- Header section --}}
+    <thead>
+
+        {{!--Insert button --}}
+        <div>
+            <form action="/add-release-form" method="get">
+                <button type="submit">Insert New</button>
+            </form>
+
+        {{!-- Search Form --}}
+
+            <form id="search-release-html" method='GET' action='/releases'>
+                <label for="input-releaseYear"></label>
+                <input type="text" name="releaseYear" id="input-releaseYear-html-search" placeholder="Search by year">
+
+                <input type="submit">
+                <a href='/'><button>Reset</button></a>
+            </form>
+        </div>
+
+        {{!-- Row headers --}}
+        <tr>
+            <th>Release ID</th>
+            <th>Year</th>
+            <th>Month</th>
+            <th>Operations</th>
+        </tr>
+    </thead>
+
+    {{!-- Body section --}}
+    <tbody>
+        {{#each data}}
+        <tr data-value={{this.releaseID}}>
+            <td>{{this.releaseID}}</td>
+            <td>{{this.releaseYear}}</td>
+            <td>{{this.releaseMonth}}</td>
+            <td>
+            <a href="/update-release-form/{{this.releaseID}}"><button type="submit">Update</button> </a>
+            <button onclick="deleteRelease({{this.releaseID}})">Delete</button>
+            </td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+<script src="./js/delete-release.js"></script>

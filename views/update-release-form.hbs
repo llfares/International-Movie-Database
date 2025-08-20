@@ -1,0 +1,40 @@
+{{!-- Update Release Form --}}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Update A Release</title>
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+</head>
+<main>
+<h1>Update A Release</h1>
+
+<form action="/update-release-form/{{data.releaseID}}" method="POST">
+    <fieldset>
+        <!-- Displaying the current year -->
+        <label for="releaseYear">Year:</label>
+        <input type="number" name="releaseYear" value="{{data.releaseYear}}" required>
+
+        <!-- Displaying the current month -->
+        <label for="releaseMonth">Month:</label>
+        <select name="releaseMonth" required>
+            <option value="{{data.releaseMonth}}">{{data.releaseMonth}}</option>
+            <option value="January">January</option>
+            <option value="February">February</option>
+            <option value="March">March</option>
+            <option value="April">April</option>
+            <option value="May">May</option>
+            <option value="June">June</option>
+            <option value="July">July</option>
+            <option value="August">August</option>
+            <option value="September">September</option>
+            <option value="October">October</option>
+            <option value="November">November</option>
+            <option value="December">December</option>
+        </select>
+
+        <button type="submit">Update Release</button>
+    </fieldset>
+</form>
+</main>
+</html>

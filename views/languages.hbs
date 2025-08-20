@@ -1,0 +1,61 @@
+{{!-- Creating Languages table --}}
+<table id="language-table">
+{{!-- Header section --}}
+    <thead>
+
+        {{!--Insert button --}}
+        <div>
+            <form action="/add-language-form" method="get">
+                <button type="submit">Insert New</button>
+            </form>
+
+        {{!-- Search Form --}}
+
+            <form id="search-language-html" method='GET' action='/languages'>
+                <label for="input-languageName"></label>
+                <input type="text" name="languageName" id="input-language-name-html-search" placeholder="Search by language">
+
+                <input type="submit">
+                <a href='/'><button>Reset</button></a>
+            </form>
+        </div>
+
+        {{!-- Row headers --}}
+        <tr>
+            <th>Language ID</th>
+            <th>Language</th>
+            <th>Original Language</th>
+            <th>Sub or Dub</th>
+            <th>Operations</th>
+        </tr>
+    </thead>
+
+    {{!-- Body section --}}
+    <tbody>
+        {{#each data}}
+        <tr data-value={{this.languageID}}>
+            <td>{{this.languageID}}</td>
+            <td>{{this.languageName}}</td>
+            <td>
+            {{#if this.originalLanguage}}
+                Yes
+            {{else}}
+                No
+            {{/if}}
+            </td>
+            <td>
+            {{#if this.subOrDub}}
+                Dub
+            {{else}}
+                Sub
+            {{/if}}
+            </td>
+            <td>
+            <a href="/update-language-form/{{this.languageID}}"><button type="submit">Update</button> </a>
+            <button onclick="deleteLanguage({{this.languageID}})">Delete</button>
+            </td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+<script src="./js/delete-language.js"></script>

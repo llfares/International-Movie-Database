@@ -1,0 +1,29 @@
+{{!-- Add Movie Form --}}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add A New Movie</title>
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+</head>
+<main>
+<h1>Add A New Movie</h1>
+
+<form id="add-movie-form" method="POST" action="/add-movie-form">
+  <fieldset>
+    <label for="input-title">Title: </label>
+    <input type="text" name="input-title" id="input-title" required>
+
+    <label for="input-synopsis">Synopsis: </label>
+    <textarea name="input-synopsis" id="input-synopsis" required></textarea>
+
+    <label for="input-minutes">Number of Minutes: </label>
+    <input type="number" name="input-minutes" id="input-minutes" required>
+
+
+    <button>Add Movie</button>
+
+  </fieldset>
+</form>
+</body>
+</main>
+

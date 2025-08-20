@@ -1,0 +1,96 @@
+{{!-- Update Movies - Releases Form --}}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Update An Movies - Releases Relationship</title>
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+</head>
+<body>
+    <main>
+        <h1>Update An Movies - Releases Relationship</h1>
+
+        <form action="/update-movies-releases-form/{{data.Movies_movieID}}/{{data.Releases_releaseID}}" method="POST">
+            <fieldset>
+
+                <label for="input-title">Movie Title: </label>
+                <select name="input-title">
+                </select>
+
+                <label for="input-release">Year - Month: </label>
+                <select name="input-release">
+                </select>
+ required>
+
+
+                <button>Update Relationship</button>
+            </fieldset>
+        </form>
+
+<script>
+ // Fetching movie titles to populate the dropdown
+    async function fetchMovieTitles() {
+        try {
+            const response = await fetch('/get-movies');
+            const movieTitles = await response.json();
+
+            const titleDropdown = document.querySelector('select[name="input-title"]');
+
+            // Adding an option for each movie title
+            movieTitles.forEach((title) => {
+                const option = document.createElement('option');
+                option.value = title.movieID;
+                option.textContent = title.title;
+                titleDropdown.appendChild(option);
+            });
+
+            // Setting the selected option based on data.Movies_movieID
+            const selectedMovieID = '{{data.Movies_movieID}}';
+            if (selectedMovieID) {
+                titleDropdown.value = selectedMovieID;
+            }
+
+        } catch (error) {
+            console.error('Error fetching movie titles:', error);
+        }
+    }
+
+    // Fetching releases to populate the dropdown
+    async function fetchReleases() {
+        try {
+            const response = await fetch('/get-releases');
+            const releases = await response.json();
+
+            const releaseDropdown = document.querySelector('select[name="input-release"]');
+
+            // Adding an option for each release
+            releases.forEach((release) => {
+                const option = document.createElement('option');
+                option.value = release.releaseID;
+                option.textContent = release.releaseYear + ' - ' + release.releaseMonth;
+
+                releaseDropdown.appendChild(option);
+                });
+
+            // Setting the selected option based on data.Releases_releaseID
+            const selectedReleaseID = '{{data.Releases_releaseID}}';
+            if (selectedReleaseID) {
+                releaseDropdown.value = selectedReleaseID;
+            }
+
+        } catch (error) {
+            console.error('Error fetching releases:', error);
+        }
+    }
+
+    // Calling fetchMovieTitles and fetchReleases functions when the page loads
+    document.addEventListener('DOMContentLoaded', async () => {
+        await fetchMovieTitles();
+        await fetchReleases();
+    });
+</script>
+
+
+    </main>
+</body>
+</html>
+

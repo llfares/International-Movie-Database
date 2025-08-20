@@ -1,0 +1,22 @@
+{{!-- Update Genre Form --}}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Update An Genre</title>
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+</head>
+<main>
+<h1>Update An Genre</h1>
+
+<form action="/update-genre-form/{{data.genreID}}"  method="POST">
+    <fieldset>
+    <!-- Display the current genre -->
+    <label for="genreName">Genre:</label>
+    <input type="text" name="genreName" value="{{data.genreName}}" required>
+
+    <button type="submit">Update Genre</button>
+</fieldset>
+</form>
+</body>
+</main>

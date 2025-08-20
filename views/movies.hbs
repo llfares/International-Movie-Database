@@ -1,0 +1,60 @@
+{{!  for the following:
+Copied from the OSU CS 340 Node.JS starter guide GitHub repository
+Date: 11/28/2023
+URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app }}
+
+{{!-- jQuery script source --}}
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+{{!-- Creating Movies table --}}
+<table id="movies-table">
+
+    {{!-- Header section --}}
+    <thead>
+
+        {{!--Insert button --}}
+        <div>
+            <form action="/add-movie-form" method="get">
+                <button type="submit">Insert New</button>
+            </form>
+
+        {{!-- Search Form --}}
+
+            <form id="search-movie-html" method='GET' action='/movies'>
+                <label for="input-title"></label>
+                <input type="text" name="title" id="input-title-html-search" placeholder="Search by title">
+
+                <input type="submit">
+                <a href='/'><button>Reset</button></a>
+            </form>
+        </div>
+
+        {{!-- Row headers --}}
+        <tr>
+            <th>Movie ID</th>
+            <th>Title</th>
+            <th>Synopsis</th>
+            <th>Number of Minutes</th>
+            <th>Operations</th>
+        </tr>
+    </thead>
+
+    {{!-- Body section --}}
+    <tbody>
+
+        {{!-- Printing movieID, title, synopsis, and minutes for each row in order --}}
+        {{#each data}}
+        <tr data-value={{this.movieID}}>
+            <td>{{this.movieID}}</td>
+            <td>{{this.title}}</td>
+            <td>{{this.synopsis}}</td>
+            <td>{{this.minutes}}</td>
+            <td>
+            <a href="/update-movie-form/{{this.movieID}}"><button type="submit">Update</button> </a>
+            <button onclick="deleteMovie({{this.movieID}})">Delete</button>
+            </td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+<script src="./js/delete_movie.js"></script>

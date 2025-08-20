@@ -1,0 +1,79 @@
+{{!-- Add Movies - Releases Form --}}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add A New Movies - Releases Relationship</title>
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+</head>
+<body>
+    <main>
+        <h1>Add A New Movies - Releases Relationship</h1>
+
+        <form id="add-movies-releases-form" method="POST" action="/add-movies-releases-form">
+            <fieldset>
+                <label for="input-title">Movie Title: </label>
+                <select name="input-title">
+                </select>
+
+                <label for="input-release">Year - Month: </label>
+                <select name="input-release">
+                </select>
+
+                <button>Add Relationship</button>
+            </fieldset>
+        </form>
+
+        <script>
+
+            // Fetching movie titles to populate the dropdown
+            async function fetchMovieTitles() {
+                try {
+                    const response = await fetch('/get-movies');
+                    const movieTitles = await response.json();
+
+                    const titleDropdown = document.querySelector('select[name="input-title"]');
+
+                    // Adding an option for each movie title
+                    movieTitles.forEach((title) => {
+                        const option = document.createElement('option');
+                        option.value = title.movieID;
+                        option.textContent = title.title;
+                        titleDropdown.appendChild(option);
+                    });
+                } catch (error) {
+                    console.error('Error fetching movie titles:', error);
+                }
+            }
+
+            // Fetching releases to populate the release dropdown
+            async function fetchReleases() {
+                try {
+                    const response = await fetch('/get-releases');
+                    const releases = await response.json();
+
+                    const releaseDropdown = document.querySelector('select[name="input-release"]');
+
+                    // Adding an option for each release
+                    releases.forEach((release) => {
+                        const option = document.createElement('option');
+                        option.value = release.releaseID;
+                        option.textContent = release.releaseYear + ' - ' + release.releaseMonth;
+                        releaseDropdown.appendChild(option);
+                    });
+                } catch (error) {
+                    console.error('Error fetching releases:', error);
+                }
+            }
+
+            // Calling fetchMovieTitles and fetchReleases functions when the page loads
+            document.addEventListener('DOMContentLoaded', () => {
+                fetchMovieTitles();
+                fetchReleases();
+            });
+        </script>
+
+    </main>
+</body>
+
+</html>
+

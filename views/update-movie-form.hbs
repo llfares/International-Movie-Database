@@ -1,0 +1,29 @@
+{{!-- Update Movie Form --}}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Update An Movie</title>
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+</head>
+<main>
+<h1>Update An Movie</h1>
+
+<form action="/update-movie-form/{{data.movieID}}"  method="POST">
+    <fieldset>
+    <!-- Display the current movie title -->
+    <label for="title">Title:</label>
+    <input type="text" name="title" value="{{data.title}}" required>
+
+    <!-- Display the current synopsis -->
+    <label for="synopsis">Synopsis:</label>
+        <textarea name="synopsis"  required>{{data.synopsis}}</textarea>
+
+    <!-- Display the current number of minutes  -->
+    <label for="minutes">Number of Minutes:</label>
+        <input type="number" name="minutes" value="{{data.minutes}}" required>
+    <button type="submit">Update Movie</button>
+</fieldset>
+</form>
+</body>
+</main>

@@ -1,0 +1,76 @@
+{{!-- Add Movies - Actor Form --}}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add A New Movies - Actors Relationship</title>
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+</head>
+<body>
+    <main>
+        <h1>Add A New Movies - Actors Relationship</h1>
+
+        <form id="add-movies-actors-form" method="POST" action="/add-movies-actors-form">
+            <fieldset>
+                <label for="input-title">Movie Title: </label>
+                <select name="input-title">
+                </select>
+
+                <label for="input-actorName">Actor: </label>
+                <select name="input-actorName">
+                </select>
+
+                <button>Add Relationship</button>
+            </fieldset>
+        </form>
+
+        <script>
+           // Fetching movie titles to populate the dropdown
+            async function fetchMovieTitles() {
+                try {
+                    const response = await fetch('/get-movies');
+                    const movieTitles = await response.json();
+
+                    const titleDropdown = document.querySelector('select[name="input-title"]');
+
+                    // Adding an option for each movie title
+                    movieTitles.forEach((title) => {
+                        const option = document.createElement('option');
+                        option.value = title.movieID;
+                        option.textContent = title.title;
+                        titleDropdown.appendChild(option);
+                    });
+                } catch (error) {
+                    console.error('Error fetching movie titles:', error);
+                }
+            }
+
+            // Fetching actors to populate the actor dropdown
+            async function fetchActors() {
+                try {
+                    const response = await fetch('/get-actors');
+                    const actors = await response.json();
+
+                    const actorDropdown = document.querySelector('select[name="input-actorName"]');
+
+                    // Adding an option for each actor
+                    actors.forEach((actor) => {
+                        const option = document.createElement('option');
+                        option.value = actor.actorID;
+                        option.textContent = actor.actorName;
+                        actorDropdown.appendChild(option);
+                    });
+                } catch (error) {
+                    console.error('Error fetching actors:', error);
+                }
+            }
+
+            // Calling fetchMovieTitles and fetchActors functions when the page loads
+            document.addEventListener('DOMContentLoaded', () => {
+                fetchMovieTitles();
+                fetchActors();
+            });
+        </script>
+
+    </main>
+</body>
+</html>

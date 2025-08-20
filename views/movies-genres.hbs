@@ -1,0 +1,48 @@
+{{!-- Creating Movies Genres table --}}
+<table id="movies-genres-table">
+{{!-- Header section --}}
+    <thead>
+        {{!--Insert button --}}
+        <div>
+            <form action="/add-movies-genres-form" method="get">
+                <button type="submit">Insert New</button>
+            </form>
+
+        {{!-- Search Form --}}
+
+        <form id="input-title-search" method='GET' action='/movies-genres'>
+            <label for="input-title"></label>
+            <input type="text" name="title" id="input-title-search" placeholder="Search movie title...">
+
+            <input type="submit">
+            <a href='/'><button>Reset</button></a>
+        </form>
+        </div>
+
+    <tr>
+        <th>Movie ID</th>
+        <th>Title</th>
+        <th>Genre ID</th>
+        <th>Genre</th>
+        <th>Operations</th>
+    </tr>
+    </thead>
+    </thead>
+
+    {{!-- Body section --}}
+    <tbody>
+        {{#each data}}
+        <tr data-value={{this.Movies_movieID}}>
+                <td>{{this.Movies_movieID}}</td>
+                <td>{{this.movieTitle}}</td>
+                <td>{{this.Genres_genreID}}</td>
+                <td>{{this.genreName}}</td>
+            <td>
+                <a href="/update-movies-genres-form/{{this.Movies_movieID}}/{{this.Genres_genreID}}"><button type="submit">Update</button> </a>
+                <button onclick="deleteMoviesGenres('{{this.Movies_movieID}}', '{{this.Genres_genreID}}')">Delete</button>
+            </td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+<script src="./js/delete-movies-genre.js"></script>

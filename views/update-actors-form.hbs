@@ -1,0 +1,67 @@
+{{!-- Update Actors Form --}}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Update Actor</title>
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+</head>
+<body>
+    <main>
+        <h1>Update Actor</h1>
+
+        <form action="/update-actors-form/{{data.actorID}}" method="POST">
+            <fieldset>
+
+                <!-- Display the current Actor Name -->
+                <label for="input-actorName">Actor Name: </label>
+                <input type="text" name="input-actorName" id="input-actorName" required value="{{data.actorName}}">
+
+                <label for="input-languageName">Language: </label>
+                <select name="input-languageName">
+                </select>
+
+                <button>Update Actor</button>
+            </fieldset>
+        </form>
+
+    <script>
+
+    // Fetching languages to populate the dropdown
+    async function fetchLanguages() {
+        try {
+            const response = await fetch('/get-languages');
+            const languages = await response.json();
+
+            const languageDropdown = document.querySelector('select[name="input-languageName"]');
+
+            // Adding a blank option
+            const blankOption = document.createElement('option');
+            blankOption.value = '';
+            blankOption.textContent = '';
+            languageDropdown.appendChild(blankOption);
+
+            // Adding an option for each language
+            languages.forEach((language) => {
+                const option = document.createElement('option');
+                option.value = language.languageID;
+                option.textContent = language.languageName;
+                languageDropdown.appendChild(option);
+            });
+
+            // Setting the selected option based on data.Languages_languageID
+            const selectedLanguageID = '{{data.Languages_languageID}}';
+            if (selectedLanguageID) {
+                languageDropdown.value = selectedLanguageID;
+            }
+        } catch (error) {
+            console.error('Error fetching languages:', error);
+        }
+    }
+
+    // Calling the fetchLanguages function when the page loads
+    document.addEventListener('DOMContentLoaded', fetchLanguages);
+    </script>
+
+    </main>
+</body>
+</html>

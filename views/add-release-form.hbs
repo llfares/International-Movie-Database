@@ -1,0 +1,37 @@
+{{!-- Add Release Form --}}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add A New Release</title>
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+</head>
+<main>
+<h1>Add A New Release</h1>
+
+<form id="add-release-form" method="POST" action="/add-release-form">
+  <fieldset>
+   <label for="input-releaseYear">Year: </label>
+    <input type="number" name="input-releaseYear" id="input-releaseYear" required>
+
+    <label for="input-releaseMonth">Month: </label>
+    <select name="input-releaseMonth" required>
+        <option>January</option>
+        <option>February</option>
+        <option>March</option>
+        <option>April</option>
+        <option>May</option>
+        <option>June</option>
+        <option>July</option>
+        <option>August</option>
+        <option>September</option>
+        <option>October</option>
+        <option>November</option>
+        <option>December</option>
+    </select>
+
+    <button>Add Release</button>
+
+  </fieldset>
+</form>
+</body>
+</main>

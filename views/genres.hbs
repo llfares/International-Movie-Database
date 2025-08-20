@@ -1,0 +1,44 @@
+{{!-- Creating Genres table --}}
+<table id="genres-table">
+{{!-- Header section --}}
+    <thead>
+{{!--Insert button --}}
+        <div>
+            <form action="/add-genre-form" method="get">
+                <button type="submit">Insert New</button>
+            </form>
+
+        {{!-- Search Form --}}
+
+            <form id="search-genre-html" method='GET' action='/genres'>
+                <label for="input-genreName"></label>
+                <input type="text" name="genreName" id="input-genre-name-html-search" placeholder="Search by genre">
+
+                <input type="submit">
+                <a href='/'><button>Reset</button></a>
+            </form>
+        </div>
+
+        {{!-- Row headers --}}
+        <tr>
+            <th>Genre ID</th>
+            <th>Genre</th>
+            <th>Operations</th>
+        </tr>
+    </thead>
+
+    {{!-- Body section --}}
+    <tbody>
+        {{#each data}}
+        <tr data-value={{this.genreID}}>
+            <td>{{this.genreID}}</td>
+            <td>{{this.genreName}}</td>
+            <td>
+            <a href="/update-genre-form/{{this.genreID}}"><button type="submit">Update</button> </a>
+            <button onclick="deleteGenre({{this.genreID}})">Delete</button>
+            </td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+<script src="./js/delete-genre.js"></script>

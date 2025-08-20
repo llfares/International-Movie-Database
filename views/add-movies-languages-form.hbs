@@ -1,0 +1,77 @@
+{{!-- Add Movies - Languages Form --}}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add A New Movies - Languages Relationship</title>
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+</head>
+<body>
+    <main>
+        <h1>Add A New Movies - Languages Relationship</h1>
+
+        <form id="add-movies-languages-form" method="POST" action="/add-movies-languages-form">
+            <fieldset>
+                <label for="input-title">Movie Title: </label>
+                <select name="input-title">
+                </select>
+
+                <label for="input-languageName">Language: </label>
+                <select name="input-languageName">
+                </select>
+
+                <button>Add Relationship</button>
+            </fieldset>
+        </form>
+
+        <script>
+
+            // Fetching movie titles to populate the dropdown
+            async function fetchMovieTitles() {
+                try {
+                    const response = await fetch('/get-movies');
+                    const movieTitles = await response.json();
+
+                    const titleDropdown = document.querySelector('select[name="input-title"]');
+
+                    // Adding an option for each movie title
+                    movieTitles.forEach((title) => {
+                        const option = document.createElement('option');
+                        option.value = title.movieID;
+                        option.textContent = title.title;
+                        titleDropdown.appendChild(option);
+                    });
+                } catch (error) {
+                    console.error('Error fetching movie titles:', error);
+                }
+            }
+
+            // Fetching languages to populate the language dropdown
+            async function fetchLanguages() {
+                try {
+                    const response = await fetch('/get-languages');
+                    const languages = await response.json();
+
+                    const languageDropdown = document.querySelector('select[name="input-languageName"]');
+
+                    // Adding an option for each language
+                    languages.forEach((language) => {
+                        const option = document.createElement('option');
+                        option.value = language.languageID;
+                        option.textContent = language.languageName;
+                        languageDropdown.appendChild(option);
+                    });
+                } catch (error) {
+                    console.error('Error fetching languages:', error);
+                }
+            }
+
+            // Calling fetchMovieTitles and fetchLanguages functions when the page loads
+            document.addEventListener('DOMContentLoaded', () => {
+                fetchMovieTitles();
+                fetchLanguages();
+            });
+        </script>
+
+    </main>
+</body>
+</html>

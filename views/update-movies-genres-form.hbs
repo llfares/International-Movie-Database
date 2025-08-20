@@ -1,0 +1,92 @@
+{{!-- Update Movies - Genres Form --}}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Update An Movies - Genres Relationship</title>
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+</head>
+<body>
+    <main>
+        <h1>Update An Movies - Genres Relationship</h1>
+
+        <form action="/update-movies-genres-form/{{data.Movies_movieID}}/{{data.Genres_genreID}}" method="POST">
+            <fieldset>
+
+                <label for="input-title">Movie Title: </label>
+                <select name="input-title">
+                </select>
+
+                <label for="input-genreName">Genre: </label>
+                <select name="input-genreName">
+                </select>
+
+                <button>Update Relationship</button>
+            </fieldset>
+        </form>
+
+<script>
+    // Fetching movie titles to populate the dropdown
+    async function fetchMovieTitles() {
+        try {
+            const response = await fetch('/get-movies');
+            const movieTitles = await response.json();
+
+            const titleDropdown = document.querySelector('select[name="input-title"]');
+
+            // Adding an option for each movie title
+            movieTitles.forEach((title) => {
+                const option = document.createElement('option');
+                option.value = title.movieID;
+                option.textContent = title.title;
+                titleDropdown.appendChild(option);
+            });
+
+            // Setting the selected option based on data.Movies_movieID
+            const selectedMovieID = '{{data.Movies_movieID}}';
+            if (selectedMovieID) {
+                titleDropdown.value = selectedMovieID;
+            }
+
+        } catch (error) {
+            console.error('Error fetching movie titles:', error);
+        }
+    }
+
+    // Fetching genres to populate the dropdown
+    async function fetchGenres() {
+        try {
+            const response = await fetch('/get-genres');
+            const genres = await response.json();
+
+            const genreDropdown = document.querySelector('select[name="input-genreName"]');
+
+            // Adding an option for each genre
+            genres.forEach((genre) => {
+                const option = document.createElement('option');
+                option.value = genre.genreID;
+                option.textContent = genre.genreName;
+                genreDropdown.appendChild(option);
+                });
+
+            // Setting the selected option based on data.Genres_genreID
+            const selectedGenreID = '{{data.Genres_genreID}}';
+            if (selectedGenreID) {
+                genreDropdown.value = selectedGenreID;
+            }
+
+        } catch (error) {
+            console.error('Error fetching genres:', error);
+        }
+    }
+
+    // Calling fetchMovieTitles and fetchGenres functions when the page loads
+    document.addEventListener('DOMContentLoaded', async () => {
+        await fetchMovieTitles();
+        await fetchGenres();
+    });
+</script>
+
+
+    </main>
+</body>
+</html>

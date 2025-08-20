@@ -1,0 +1,38 @@
+{{!-- Update Language Form --}}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Update A Language</title>
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+</head>
+<main>
+<h1>Update A Language</h1>
+
+<form action="/update-language-form/{{data.languageID}}" method="POST">
+    <fieldset>
+        <!-- Displaying the current language -->
+        <label for="languageName">Language:</label>
+        <input type="text" name="languageName" value="{{data.languageName}}" required>
+
+        <!-- Displaying the current original language -->
+        <label for="originalLanguage">Original Language?</label>
+        <select name="originalLanguage" required>
+            <option value="{{data.originalLanguageString}}">{{data.originalLanguageString}}</option>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select>
+
+        <!-- Display the current sub or dub  -->
+        <label for="subOrDub">Sub or Dub:</label>
+        <select name="subOrDub" required>
+            <option value="{{data.subOrDubString}}">{{data.subOrDubString}}</option>
+            <option value="Sub">Sub</option>
+            <option value="Dub">Dub</option>
+        </select>
+
+        <button type="submit">Update Language</button>
+    </fieldset>
+</form>
+</main>
+</html>

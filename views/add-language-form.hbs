@@ -1,0 +1,33 @@
+{{!-- Add Language Form --}}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add A New Language</title>
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+</head>
+<main>
+<h1>Add A New Language</h1>
+
+<form id="add-language-form" method="POST" action="/add-language-form">
+  <fieldset>
+    <label for="input-languageName">Language: </label>
+    <input type="text" name="input-languageName" id="input-languageName" required>
+
+    <label for="input-originalLanguage">Original Language? </label>
+    <select name="input-originalLanguage" required>
+        <option>Yes</option>
+        <option>No</option>
+    </select>
+
+    <label for="input-subOrDub">Sub or Dub: </label>
+    <select name="input-subOrDub" required>
+        <option>Sub</option>
+        <option>Dub</option>
+    </select>
+
+    <button>Add Language</button>
+
+  </fieldset>
+</form>
+</body>
+</main>

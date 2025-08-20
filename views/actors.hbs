@@ -1,0 +1,50 @@
+{{!-- Creating Actors table --}}
+<table id="actors-table">
+
+    {{!-- Header section --}}
+    <thead>
+
+        {{!--Insert button --}}
+        <div>
+            <form action="/add-actors-form" method="get">
+                <button type="submit">Insert New</button>
+            </form>
+
+        {{!-- Search Form --}}
+
+        <form id="input-actorName-search" method='GET' action='/actors'>
+            <label for="input-actorName"></label>
+            <input type="text" name="actorName" id="input-actorName-search" placeholder="Search actor name">
+
+            <input type="submit">
+            <a href='/'><button>Reset</button></a>
+        </form>
+        </div>
+
+    <tr>
+        <th>Actor ID</th>
+        <th>Actor Name</th>
+        <th>Language</th>
+        <th>Operations</th>
+    </tr>
+    </thead>
+
+    {{!-- Body section --}}
+    <tbody>
+    {{!-- Printing actorID, name, and languageName for each row in order --}}
+    {{#each data}}
+        <tr data-value={{this.actorID}}>
+            <td>{{this.actorID}}</td>
+            <td>{{this.actorName}}</td>
+            <td>{{this.languageName}}</td>
+            <td>
+            <a href="/update-actors-form/{{this.actorID}}"><button type="submit">Update</button> </a>
+            <button onclick="deleteActor({{this.actorID}})">Delete</button>
+            </td>
+        </tr>
+    {{/each}}
+</tbody>
+</table>
+<script src="./js/delete-actor.js"></script>
+
+
